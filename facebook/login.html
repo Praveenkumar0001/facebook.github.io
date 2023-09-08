@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css"> 
+    <title>Facebook</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-list">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Friends</a></li>
+                <li><a href="#">Messages</a></li>
+            </ul>
+            <div class="logo">
+                <img src="facebook.png" alt="Facebook Logo">
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="feed">
+            <article class="post"> 
+                <header class="post-header">
+                    <img class="user-avatar" src="user.jpg" alt="User 1" id="userAvatar">
+                    <span class="username">Praveen Kumar</span>
+                </header>
+                <p class="post-content">Just had an amazing time at the beach! ☀🏖</p>
+                <figure class="post-image-container"> <!-- Added a <figure> container for images -->
+                    <img class="post-image" src="beach.jpeg" alt="Beach Photo">
+                    <figcaption>Enjoying the sunny day at the beach.</figcaption>
+                </figure>
+                <div class="post-actions">
+                    <button class="like-button">Like</button>
+                    <button class="comment-button">Comment</button>
+                    <button class="share-button">Share</button>
+                </div>
+            </article>
+
+            <!-- New post input section -->
+            <div class="add-post">
+                <textarea id="newPost" placeholder="Write your post here..."></textarea>
+                <button id="submitPost">Post</button>
+            </div>
+        </section>
+        <aside class="sidebar">
+            <div class="friend-suggestions">
+                <h2>Friend Suggestions</h2>
+                <ul class="friend-list">
+                    <li><img src="user2.png" alt="User 2"> Jane Smith</li>
+                    <li><img src="user3.png" alt="User 3"> Garima</li>
+                </ul>
+            </div>
+            <div class="trending-topics">
+                <h2>Trending Topics</h2>
+                <ul class="topic-list">
+                    <li>#Travel</li>
+                    <li>#Foodie</li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+    <footer>
+        <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Cookies</a>
+        </div>
+        <p>&copy; 2023 Facebook</p>
+    </footer>
+   <div id="addPostModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <textarea id="postText" placeholder="Write something..."></textarea>
+                <input type="file" id="postImage" accept="image/*">
+                <button id="postButton">Post</button>
+            </div>
+        </div>
+    
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // User Avatar Upload (as shown in the previous code)
+    
+                // Add Post Modal
+                const addPostModal = document.getElementById("addPostModal");
+                const closeModal = document.getElementById("closeModal");
+                const postText = document.getElementById("postText");
+                const postImage = document.getElementById("postImage");
+                const postButton = document.getElementById("postButton");
+                const feedSection = document.querySelector(".feed");
+    
+                // Open modal
+                userAvatar.addEventListener("click", function() {
+                    addPostModal.style.display = "block";
+                });
+    
+                // Close modal
+                closeModal.addEventListener("click", function() {
+                    addPostModal.style.display = "none";
+                });
+    
+                // Add new post
+                postButton.addEventListener("click", function() {
+                    const postContainer = document.createElement("article");
+                    postContainer.className = "post";
+    
+                    const postHeader = document.createElement("header");
+                    // Create and append other post components as needed...
+    
+                    // Customize post content based on user input
+                    const postContent = document.createElement("p");
+                    postContent.className = "post-content";
+                    postContent.textContent = postText.value;
+    
+                    const postImageContainer = document.createElement("figure");
+                    // Create and append the image as needed...
+    
+                    // Create and append other post components as needed...
+    
+                    // Append post components to the post container
+                    postContainer.appendChild(postHeader);
+                    postContainer.appendChild(postContent);
+                    postContainer.appendChild(postImageContainer);
+                    // Append the post container to the feed
+                    feedSection.appendChild(postContainer);
+    
+                    // Clear user input
+                    postText.value = "";
+    
+                    // Close the modal
+                    addPostModal.style.display = "none";
+                });
+    
+                // Delete post
+                feedSection.addEventListener("click", function(event) {
+                    if (event.target.classList.contains("delete-button")) {
+                        event.target.closest(".post").remove();
+                    }
+                });
+            });
+        </script>
+</body>
+</html>
